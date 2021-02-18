@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField, FloatField, TextAreaField, DataRequired
+from wtforms import StringField, DateField, SelectField, SubmitField, FloatField, TextAreaField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, URL
 from grocery_app.models import ItemCategory, GroceryStore

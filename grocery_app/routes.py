@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
 from grocery_app.models import GroceryStore, GroceryItem
+from grocery_app.forms import GroceryStoreForm, GroceryItemForm
 # from grocery_app.forms import BookForm, AuthorForm, GenreForm
 
 # Import app and db from events_app package so that we can run app
@@ -45,7 +46,7 @@ def new_item():
     form = GroceryItemForm()
 
 
-    if forn.validate_on_submit():
+    if form.validate_on_submit():
         # - create a new GroceryItem object and save it to the database,
         new_GroceryItem = GroceryItem(
             name=form.name.data,
@@ -79,7 +80,7 @@ def store_detail(store_id):
     flash('The new Grocery Store was updated succesfully')        
 
     store = GroceryStore.query.get(store_id)
-    return render_template('store_detail.html', store=store)
+    return render_template('store_detail.html', store=store, form=form)
 
 @main.route('/item/<item_id>', methods=['GET', 'POST'])
 def item_detail(item_id):
@@ -100,5 +101,5 @@ def item_detail(item_id):
     flash('You have updated the Grocery Item successfully')
 
     item = GroceryItem.query.get(item_id)
-    return render_template('item_detail.html', item=item)
+    return render_template('item_detail.html', item=item, form=form)
 

@@ -3,17 +3,25 @@
 
 <h1>New Store</h1>
 
-<form>
+<form method="POST" action="{{ url_for('main.new_store') }}">
+    {{ form.csrf_token }} 
     <fieldset>
-        <legend>Please enter your information:</legend>
+        <legend>Please enter the store information:</legend>
+        
+        {% for error in form.title.errors %}
+            <span class="error">*{{ error }}</span>
+        {% endfor %}
+        {{ form.title.label }}
+        {{ form.title }}
 
+        {% for error in form.address.errors %}
+            <span class="error">*{{ error }}</span>
+        {% endfor %}
+        {{ form.address.label }}
+        {{ form.address }}
 
+        {{ form.submit }}
 
-        <!-- TODO: Remove the next paragraph and use the `form` object passed in 
-            from the route to render a form. -->
-        <p><em>Form fields go here!</em></p>
-
-        <input type="submit" value="Submit">
     </fieldset>
 </form>
 
