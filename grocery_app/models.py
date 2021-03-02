@@ -19,7 +19,7 @@ class GroceryStore(db.Model):
     address = db.Column(db.String(200), nullable=False)
     items = db.relationship('GroceryItem', back_populates='store')
 
-    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_by = db.relationship('User')
 
 class GroceryItem(db.Model):
@@ -34,6 +34,8 @@ class GroceryItem(db.Model):
 
     created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_by = db.relationship('User')
+
+    user_items = db.relationship("User", back_populates='shopping_list_items')
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

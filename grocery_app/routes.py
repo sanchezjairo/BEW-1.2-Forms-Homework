@@ -114,6 +114,7 @@ def item_detail(item_id):
 
 @main.route('/add_to_shopping_list/<item_id>', methods=['POST'])
 # adds item to current_user's shopping list
+@login_required
 def add_to_shopping_list(item_id):
     item = GroceryItem.query.get(item_id)
     current_user.shopping_list_items.append(item)
@@ -133,7 +134,6 @@ def shopping_list():
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
-@login_required
 def signup():
     print('in signup')
     form = SignUpForm()
@@ -153,7 +153,6 @@ def signup():
 
 
 @auth.route('/login', methods=['GET', 'POST'])
-@login_required
 def login():
     form = LoginForm()
     if form.validate_on_submit():
